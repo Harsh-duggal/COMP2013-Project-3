@@ -4,8 +4,12 @@ const port = 3000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
+const User = require("./models/user");//import for user model
+const bcrypt = require("bcrypt");//import for bcrypt        
+const jwt = require("jsonwebtoken");//import for jsonweb tokens        
+const crypto = require("crypto");
 require("dotenv").config();
-const { DB_URI } = process.env;
+const { DB_URI, SECRET_KEY } = process.env;
 
 server.use(cors());
 server.use(express.json());
@@ -25,6 +29,69 @@ mongoose
 server.get("/", (request, response) => {
   response.send("LIVE!");
 });
+
+server.post("/create-user", async (request, response) => {
+    const { username, password } = request.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = new User({
+            username,
+            password: hashedPassword,
+        });
+
+        await newUser.save();
+
+        response.send({ message: "User created successfully" });
+
+    } catch (err) {
+        response.status(500).send({ message: "User already exists" });
+    }
+});
+
+//Login route 
+server.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Check if user exists
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).send({ message: "User does not exist" });
+    }
+
+    // Compare hashed passwords
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(403).send({ message: "Incorrect username or password" });
+    }
+     //To check if logging as Admin
+    const isAdmin = username === "admin";
+
+    // Create JWT with admin flag
+    const jwtToken = jwt.sign(
+      {
+        id: user._id,
+        username: username,
+        isAdmin: isAdmin,
+      },
+      SECRET_KEY
+    );
+
+    res.status(200).send({
+      message: "Login successful",
+      jwtToken
+    });
+
+  } catch (error) {
+    res.status(500).send({ message: "Login failed" });
+  }
+});
+
+
 
 server.get("/products", async (request, response) => {
   try {
