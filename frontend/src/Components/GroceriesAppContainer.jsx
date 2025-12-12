@@ -20,7 +20,6 @@ export default function GroceriesAppContainer() {
   const [isEditing, setIsEditing] = useState(false);
 
   //////////useEffect////////
-
   useEffect(() => {
     handleProductsFromDB();
   }, [postResponse]);
