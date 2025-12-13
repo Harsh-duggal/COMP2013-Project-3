@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import axios from "axios";
 import ProductForm from "./ProductForm";
 
-export default function GroceriesAppContainer() {
+export default function GroceriesAppContainer({username, isAdmin}) {
   /////////// States ///////////
   const [productQuantity, setProductQuantity] = useState();
   const [cartList, setCartList] = useState([]);
@@ -196,15 +196,17 @@ export default function GroceriesAppContainer() {
   /////////Renderer
   return (
     <div>
-      <NavBar quantity={cartList.length} />
+      <NavBar quantity={cartList.length} username = {username}/>
       <div className="GroceriesApp-Container">
+       
+       {isAdmin &&(
         <ProductForm
           handleOnSubmit={handleOnSubmit}
           postResponse={postResponse}
           handleOnChange={handleOnChange}
           formData={formData}
           isEditing={isEditing}
-        />
+        />)}
         <ProductsContainer
           products={productList}
           handleAddQuantity={handleAddQuantity}
@@ -213,6 +215,7 @@ export default function GroceriesAppContainer() {
           productQuantity={productQuantity}
           handleEditProduct={handleEditProduct}
           handleDeleteProduct={handleDeleteProduct}
+          isAdmin={isAdmin}
         />
         <CartContainer
           cartList={cartList}
