@@ -8,6 +8,9 @@ import PrivateRoute from "./Components/PrivateRoute";
 
 import products from "./data/products";
 import GroceriesAppContainer from "./Components/GroceriesAppContainer";
+import AddProduct from "./Components/Add-Product";
+import EditProductPage from "./Components/Edit-Product";
+
 
 function App() {
   return (
@@ -16,6 +19,10 @@ function App() {
     <Routes>
   <Route path="/" element={<LoginPage />} />
   <Route path="/create-user" element={<CreateUserPage />} />
+  <Route path="/add-product" element={<AddProduct />} />
+  <Route path="/edit-product" element={<EditProductPage />} />
+
+=======
   {/*<Route path="/main" element={ <GroceriesAppContainer /> } />*/}
   <Route
   path="/main"
@@ -25,9 +32,7 @@ function App() {
     </PrivateRoute>
   }
 />
-  {/* <Route path="/main" element={<GroceriesMain/>} />
-   <Route path="/add-product" element={<AddProduct />} />
-  <Route path="/edit-product/:id" element={<EditProductPage />} /> */}
+
   <Route path="/not-authorized" element={<NotAuthorized />} />
   <Route path="*" element={<PageNotFound />} /> 
 </Routes>
