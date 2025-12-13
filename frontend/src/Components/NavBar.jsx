@@ -17,13 +17,13 @@ export default function NavBar({ quantity, username, isAdmin}) {
     <nav className="NavBar">
       <div className="NavDiv NavUser">
         <h3>Hello, {username}</h3>
+        <button onClick={handleLogout}>Logout</button>
 
-        {isAdmin && (//To check if the user logged in is "admin"
-    <button onClick={() => navigate("/add-product")}>
+         {isAdmin && (//To check if the user logged in is "admin"
+    <button className="addButton" onClick={() => navigate("/add-product")}>
       Add New Product
     </button>
   )}
-        <button onClick={handleLogout}>Logout</button>
       </div>
 
 

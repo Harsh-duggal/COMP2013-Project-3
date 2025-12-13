@@ -51,22 +51,22 @@ server.post("/create-user", async (request, response) => {
 });
 
 //Login route 
-server.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+server.post("/login", async (request, response) => {
+  const { username, password } = request.body;
 
   try {
     // Check if user exists
     const user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(404).send({ message: "User does not exist" });
+      return response.status(404).send({ message: "User does not exist" });
     }
 
     // Compare hashed passwords
     const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
-      return res.status(403).send({ message: "Incorrect username or password" });
+      return response.status(403).send({ message: "Incorrect username or password" });
     }
      //To check if logging as Admin
     const isAdmin = username === "admin";
@@ -74,20 +74,18 @@ server.post("/login", async (req, res) => {
     // Create JWT with admin flag
     const jwtToken = jwt.sign(
       {
-        id: user._id,
-        username: username,
-        isAdmin: isAdmin,
+        id: user._id, username, isAdmin
       },
       SECRET_KEY
     );
 
-    res.status(200).send({
-      message: "Login successful",
-      token:jwtToken
+    response.status(200).send({
+      message: "User Authenticated",
+      jwtToken
     });
 
   } catch (error) {
-    res.status(500).send({ message: "Login failed" });
+    response.status(500).send({ message: "Login failed" });
   }
 });
 

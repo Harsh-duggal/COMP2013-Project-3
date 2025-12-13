@@ -29,17 +29,15 @@ export default function LoginPage() {
             const response = await axios.post("http://localhost:3000/login", formData);
 
             if(response.data.message === "User Authenticated"){
-                navigate("/main");
+         Cookies.set("jwtToken", response.data.jwtToken);
+         navigate("/main");
+
             }else{
             setPostResponse(response.data.message);
             }
             // Save JWT Cookie
            // Cookies.set("jwt-authorization", response.data.token);
             Cookies.set("jwtToken", response.data.jwtToken);
-
-
-            // Navigate to main page
-            navigate("/main");
         } catch (error) {
             setPostResponse( error.response?.data?.message || "Login Failed");
         }

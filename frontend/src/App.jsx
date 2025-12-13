@@ -17,8 +17,24 @@ function App() {
     <Routes>
   <Route path="/" element={<LoginPage />} />
   <Route path="/create-user" element={<CreateUserPage />} />
-  <Route path="/add-product" element={<AddProduct />} />
-  <Route path="/edit-product" element={<EditProductPage />} />
+<Route
+  path="/add-product"
+  element={
+    <PrivateRoute requireAdmin={true}>
+      <AddProduct />
+    </PrivateRoute>
+  }
+/>
+
+<Route
+  path="/edit-product"
+  element={
+    <PrivateRoute requireAdmin={true}>
+      <EditProductPage />
+    </PrivateRoute>
+  }
+/>
+
   <Route
   path="/main"
   element={
