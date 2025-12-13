@@ -33,7 +33,9 @@ export default function LoginPage() {
             setPostResponse(response.data.message);
             }
             // Save JWT Cookie
-            Cookies.set("jwt-authorization", response.data.token);
+           // Cookies.set("jwt-authorization", response.data.token);
+            Cookies.set("jwt-authorization", response.data.jwtToken);
+
 
             // Navigate to main page
             navigate("/main");

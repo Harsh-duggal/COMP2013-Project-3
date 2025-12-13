@@ -11,20 +11,22 @@ export default function ProductsContainer({
 }) {
   return (
     <div className="ProductsContainer">
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          {...product}
-          handleAddQuantity={handleAddQuantity}
-          handleRemoveQuantity={handleRemoveQuantity}
-          handleAddToCart={handleAddToCart}
-          productQuantity={
-            productQuantity.find((p) => p.id === product.id).quantity
-          }
-          handleEditProduct={handleEditProduct}
-          handleDeleteProduct={handleDeleteProduct}
-        />
-      ))}
+      {products.map((product) => {
+        const q = productQuantity.find((p) => p.id === product.id)?.quantity || 0;
+
+        return (
+          <ProductCard
+            key={product.id}
+            {...product}
+            handleAddQuantity={handleAddQuantity}
+            handleRemoveQuantity={handleRemoveQuantity}
+            handleAddToCart={handleAddToCart}
+            productQuantity={q}
+            handleEditProduct={handleEditProduct}
+            handleDeleteProduct={handleDeleteProduct}
+          />
+        );
+      })}
     </div>
   );
 }
