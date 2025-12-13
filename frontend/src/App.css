@@ -153,9 +153,31 @@ img {
 }
 
 .product-form {
-  width: 20%;
+  align-items: center;
+  padding: 30px;
+  background-color: #373737;
+  border-radius: 6px; /* square-ish */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 #edit-button {
   background-color: rgb(76, 43, 226);
+}
+.webDiv{
+height: "100vh";
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: #222;
+color: white;
+text-align: center;
+}
+.dinoText{
+  font-size:50px;
+}
+.backToLogin{
+  color:#4aa3ff;
+  font-size:20px;
 }

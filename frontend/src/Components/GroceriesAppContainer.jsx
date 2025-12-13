@@ -87,6 +87,8 @@ export default function GroceriesAppContainer({username, isAdmin}) {
     setIsEditing(true);
     setPostResponse("");
   };
+  console.log("IS ADMIN:", isAdmin);
+
 
   const handleUpdateProduct = async (productId) => {
     try {
@@ -188,6 +190,7 @@ export default function GroceriesAppContainer({username, isAdmin}) {
   const handleRemoveFromCart = (productId) => {
     const newCartList = cartList.filter((product) => product.id !== productId);
     setCartList(newCartList);
+    
   };
 
   const handleClearCart = () => {
@@ -196,17 +199,8 @@ export default function GroceriesAppContainer({username, isAdmin}) {
   /////////Renderer
   return (
     <div>
-      <NavBar quantity={cartList.length} username = {username}/>
+      <NavBar quantity={cartList.length} username = {username} isAdmin={isAdmin}/>
       <div className="GroceriesApp-Container">
-       
-       {isAdmin &&(
-        <ProductForm
-          handleOnSubmit={handleOnSubmit}
-          postResponse={postResponse}
-          handleOnChange={handleOnChange}
-          formData={formData}
-          isEditing={isEditing}
-        />)}
         <ProductsContainer
           products={productList}
           handleAddQuantity={handleAddQuantity}

@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LoginFormComponent from "./LoginPageComponent";
+//Harshduggal
+
 
 export default function CreateUserPage() {
     const [formData, setFormData] = useState({
@@ -30,8 +32,6 @@ export default function CreateUserPage() {
 
             setPostResponse(response.data.message);
 
-            // user stays here until they manually go back to "/" to login
-
         } catch (error) {
             setPostResponse(error.response.data.message || "Could not create user");
         }
@@ -50,7 +50,6 @@ export default function CreateUserPage() {
             handleOnChange={handleOnChange}
             handleOnSubmit={handleOnSubmit}
             postResponse={postResponse}
-            textForLink="Already have an account?"
             linkTo="/"
         />
     );

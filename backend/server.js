@@ -4,9 +4,9 @@ const port = 3000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
-const User = require("./models/user");//import for user model
-const bcrypt = require("bcrypt");//import for bcrypt        
-const jwt = require("jsonwebtoken");//import for jsonweb tokens        
+const User = require("./models/user");
+const bcrypt = require("bcrypt");        
+const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 require("dotenv").config();
 const { DB_URI, SECRET_KEY } = process.env;
@@ -83,7 +83,7 @@ server.post("/login", async (req, res) => {
 
     res.status(200).send({
       message: "Login successful",
-      jwtToken
+      token:jwtToken
     });
 
   } catch (error) {

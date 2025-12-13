@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GroceriesAppContainer from "./GroceriesAppContainer";
+//Harshduggal, Annick
 
 export default function MainPage() {
     const navigate = useNavigate();
@@ -18,7 +19,6 @@ export default function MainPage() {
             navigate("/not-authorized");
             return;
         }
-
         try {
             const decoded = jwtDecode(token);
             setUsername(decoded.username);
@@ -31,7 +31,6 @@ export default function MainPage() {
     return (
         
      <div>
-      {/* This renders ALL products */}
       <GroceriesAppContainer username={username} isAdmin={isAdmin} />
     </div>
     );

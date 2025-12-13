@@ -4,6 +4,7 @@ export default function ProductForm({
   formData,
   postResponse,
   isEditing,
+  //Harshduggal
 }) {
   return (
     <div className="product-form">

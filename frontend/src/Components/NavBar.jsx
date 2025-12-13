@@ -1,9 +1,13 @@
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-export default function NavBar({ quantity, username }) {
+export default function NavBar({ quantity, username, isAdmin}) {
   const navigate = useNavigate();
 
+  //Harshduggal
+
+
+//removes jwtToken when the user click on logout button
   const handleLogout = () => {
     Cookies.remove("jwtToken");
     navigate("/");
@@ -13,13 +17,19 @@ export default function NavBar({ quantity, username }) {
     <nav className="NavBar">
       <div className="NavDiv NavUser">
         <h3>Hello, {username}</h3>
+
+        {isAdmin && (//To check if the user logged in is "admin"
+    <button onClick={() => navigate("/add-product")}>
+      Add New Product
+    </button>
+  )}
         <button onClick={handleLogout}>Logout</button>
       </div>
+
 
       <div className="NavDiv NavTitle">
         <h2>Groceries App 🍎</h2>
       </div>
-
       <div className="NavDiv NavCart">
         <img
           src={

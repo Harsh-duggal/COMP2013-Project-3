@@ -1,4 +1,5 @@
 import ProductCard from "./ProductCard";
+//Harshduggal
 
 export default function ProductsContainer({
   products,
@@ -8,6 +9,7 @@ export default function ProductsContainer({
   productQuantity,
   handleEditProduct,
   handleDeleteProduct,
+  isAdmin
 }) {
   return (
     <div className="ProductsContainer">
@@ -24,6 +26,7 @@ export default function ProductsContainer({
             productQuantity={q}
             handleEditProduct={handleEditProduct}
             handleDeleteProduct={handleDeleteProduct}
+            isAdmin={isAdmin}
           />
         );
       })}

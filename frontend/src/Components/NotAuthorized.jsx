@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+//Harshduggal
+
+
+//TO handle when there is a user not registered
+
 
 export default function NotAuthorized() {
     return (
